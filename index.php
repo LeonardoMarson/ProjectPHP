@@ -6,27 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entrar</title>
 </head>
-<body>
-    <div>
-        <h1>Title</h1>
-    </div>
-    <form action="">
+    <body>
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
+
         <div>
-            <label for="">Usuário</label>
-            <input type="text">
+            <h1>Title</h1>
         </div>
-        <div>
-            <label for="">Senha</label>
-            <input type="password">
+        
+        <form action="">
+            <div>
+                <label for="">Usuário</label>
+                <input type="text">
+            </div>
+            <div>
+                <label for="">Senha</label>
+                <input type="password">
+            </div>
+            <div>
+                <a href="">Esqueceu sua senha?</a>
+                <button type="submit">Enviar</button>
+            </div>   
+            <div>
+                <p>Não tem uma conta?</p>
+                <a href="">Inscrever-se no</a>
+            </div>
+        </form>
+
+        <div id="g_id_onload"
+            data-client_id="164457916901-nlipobm2ts76l5v2cnjkk0lmg3sm562s.apps.googleusercontent.com"
+            data-login_uri="http://localhost/php-project-apis/ProjectPHP/index.php"
+            data-auto_prompt="false">
         </div>
-        <div>
-            <a href="">Esqueceu sua senha?</a>
-            <button type="submit">Enviar</button>
-        </div>   
-        <div>
-            <p>Não tem uma conta?</p>
-            <a href="">Inscrever-se no</a>
+        <div class="g_id_signin"
+            data-type="standard"
+            data-size="large"
+            data-theme="filled_blue"
+            data-text="continue_with"
+            data-shape="circle"
+            data-logo_alignment="center"
+            data-width>
         </div>
-    </form>
-</body>
+    </body>
 </html>
