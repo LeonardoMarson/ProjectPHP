@@ -26,15 +26,16 @@
                 <a href="">Esqueceu sua senha?</a>
                 <button type="submit">Enviar</button>
             </div>   
-            <div>
-                <p>Não tem uma conta?</p>
-                <a href="">Inscrever-se no</a>
-            </div>
         </form>
+
+        <div>
+            <p>Não tem uma conta?</p>
+            <a href="">Inscrever-se no</a>
+        </div>
 
         <div id="g_id_onload"
             data-client_id="164457916901-nlipobm2ts76l5v2cnjkk0lmg3sm562s.apps.googleusercontent.com"
-            data-login_uri="http://localhost/php-project-apis/ProjectPHP/index.php"
+            data-login_uri="http://localhost/php-project-apis/ProjectPHP/login.php"
             data-auto_prompt="false">
         </div>
         <div class="g_id_signin"
