@@ -1,3 +1,3 @@
 # Projeto PHP
 
-#Projeto simples utilizando PHP, destinado à disciplina de Desenvolvimento Web
+#Projeto utilizando PHP, destinado à disciplina de Desenvolvimento Web
