@@ -13,17 +13,10 @@
         $payload = $googleClient->verifyIdToken($id_token);
 
         if (isset($payload['email'])) {
-            // $name = $payload['name'];
-            // $email = $payload['email'];
-
-            // $_SESSION['userName'] = $name;
-            // $_SESSION['email'] = $email;
             echo "<pre>";
             print_r($payload);
             echo "</pre>";
         }
-
-        //print_r($_SESSION);
     }
     else {
         echo "Credential or user not found!";

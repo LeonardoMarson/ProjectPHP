@@ -5,7 +5,7 @@
     global $email, $password, $username;
 
     if(isset($_POST['credential'])){
-        
+         
         $googleClient = new Google\Client();
         $googleClient->setAuthConfig('../client_secret.json');
         $googleClient->addScope('https://www.googleapis.com/auth/userinfo.profile');
@@ -15,14 +15,12 @@
         $payload = $googleClient->verifyIdToken($id_token);
 
         if (isset($payload['email'])) {
-
              $email = $payload['email'];
              $password = $payload['sub'];
              $username = $payload['name'];
         }
     }
     else{
-
         $email = $_POST["email"];
         $password = $_POST["password"];
         $username = $_POST["username"];
@@ -30,11 +28,8 @@
 
     $stmt= $connect->prepare("SELECT email FROM user WHERE email=?");
     $stmt->bind_param("s", $email);
-    
     $stmt->execute();
-
     $result = $stmt->get_result();
-
     $userEmail = $result->fetch_assoc();
 
      if (isset($userEmail)){
