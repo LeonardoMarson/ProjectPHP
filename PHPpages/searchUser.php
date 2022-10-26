@@ -2,7 +2,7 @@
     require_once("connect.php"); 
     require_once '../vendor/autoload.php';
 
-    global $email, $password, $username;
+    global $email, $password;
 
     if(isset($_POST['credential'])){
         
@@ -16,52 +16,44 @@
 
         if (isset($payload['email'])) {
 
-             $email = $payload['email'];
              $password = $payload['sub'];
-             $username = $payload['name'];
+
+             $stmt= $connect->prepare("SELECT password FROM user WHERE password=?");
+             $stmt->bind_param("s", $password);
+             
+             $stmt->execute();
+         
+             $result = $stmt->get_result();
+         
+             $user = $result->fetch_assoc();
+         
+              if (isset($user)){
+                 echo "<p>Usuário autenticado com sucesso pelo Google!</p>";
+                 header('Refresh: 2; URL=../pages/qualquer.php');
+             }
         }
     }
     else{
 
         $email = $_POST["email"];
         $password = $_POST["password"];
-        $username = $_POST["username"];
-    }
 
-    $stmt= $connect->prepare("SELECT email FROM user WHERE email=?");
-    $stmt->bind_param("s", $email);
+        $stmt= $connect->prepare("SELECT email, password FROM user WHERE email=? AND password=?");
+        $stmt->bind_param("ss", $email, $password);
+        
+        $stmt->execute();
     
-    $stmt->execute();
-
-    $result = $stmt->get_result();
-
-    $userEmail = $result->fetch_assoc();
-
-     if (isset($userEmail)){
-        echo "<p>email ja registrado</p>";
-        header('Refresh: 2; URL=../pages/signup.php');
-    }
-
-    $stmt= $connect->prepare("SELECT username FROM user WHERE username=?");
-    $stmt->bind_param("s", $username);
+        $result = $stmt->get_result();
     
-    $stmt->execute();
-
-    $result = $stmt->get_result();
-
-    $userName = $result->fetch_assoc();
+        $user = $result->fetch_assoc();
     
-     if (isset($userName)){
-        echo "<p>username ja registrado</p>";
-        header('Refresh: 2; URL=../pages/signup.php');
+         if (isset($user)){
+            echo "<p>Usuário autenticado com sucesso!</p>";
+            header('Refresh: 2; URL=../pages/qualquer.php');
+        }
+    
     }
-
-    $stmt= $connect->prepare("INSERT INTO user (email, password, username) VALUES (?,?,?)");
-    $stmt->bind_param("sss", $email, $password, $username);
-
-    $stmt->execute();
 
     $connect->close();
 
-    header('Refresh: 2; URL=../index.php');
 ?>
