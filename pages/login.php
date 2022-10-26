@@ -1,10 +1,10 @@
 <?php
-    require_once 'vendor/autoload.php';
+    require_once '../vendor/autoload.php';
 
     session_start();
 
     $googleClient = new Google\Client();
-    $googleClient->setAuthConfig('client_secret.json');
+    $googleClient->setAuthConfig('../client_secret.json');
     $googleClient->addScope('https://www.googleapis.com/auth/userinfo.profile');
     $googleClient->addScope('https://www.googleapis.com/auth/userinfo.email');
 
@@ -13,14 +13,17 @@
         $payload = $googleClient->verifyIdToken($id_token);
 
         if (isset($payload['email'])) {
-            $name = $payload['name'];
-            $email = $payload['email'];
+            // $name = $payload['name'];
+            // $email = $payload['email'];
 
-            $_SESSION['userName'] = $name;
-            $_SESSION['email'] = $email;
+            // $_SESSION['userName'] = $name;
+            // $_SESSION['email'] = $email;
+            echo "<pre>";
+            print_r($payload);
+            echo "</pre>";
         }
 
-        print_r($_SESSION);
+        //print_r($_SESSION);
     }
     else {
         echo "Credential or user not found!";
