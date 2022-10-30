@@ -1,34 +1,45 @@
-:root{
+:root {
     --primarycolor: #000000;
     --secondarycolor: #1ED760;
 
 }
-*{
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
+}
 
-html{
+html {
     font-size: 62.5%;
     font-family: 'Roboto Condensed', sans-serif;
 }
 
-header{
-    border-bottom: 1px solid rgb(204, 204, 204);
+header {
     text-align: center;
     padding: 1.2rem;
     font-size: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
+    gap: 3rem;
 }
 
-main{
+header p {
+    font-size: 3.5rem;
+    font-weight: bold;
+    width: 400px;
+}
+
+main {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-#wrapper{
+#wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,13 +47,13 @@ main{
     width: 400px;
 }
 
-#first-section{
+#first-section {
     display: flex;
     justify-content: center;
     margin-top: 3rem;
 }
 
-.separator{
+.separator  {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -84,29 +95,40 @@ form{
     margin-bottom: 2rem;
 }
 
-#form-fields label{
+#form-fields input#username {
+    margin-bottom: 0.5rem;
+}
+
+#form-fields p {
+    font-weight: normal;
+    width: 100%;
+    align-items: flex-start;
+}
+
+#form-fields label {
     align-self: flex-start;
 }
 
-#form-button{
+#form-button {
     width: 100%;
     font-size: 1.4rem;
+    margin-top: 1rem;
     display: flex;
-    justify-content: space-between;
-    height: 6rem;
+    justify-content: center;
+    height: 7.5rem;
 }
 
-#form-button a{
+#form-button a {
     text-decoration: none;
     color: var(--primarycolor);
 }
 
-#form-button a:hover{
+#form-button a:hover {
     text-decoration: underline;
     cursor:default;
 }
 
-#form-button button{
+#form-button button {
     background-color: var(--secondarycolor);
     border: none;
     border-radius: 5rem;
@@ -115,40 +137,29 @@ form{
     margin-top: 1.8rem;
     margin-bottom: 0.2rem;
     font-family: 'Roboto Condensed', sans-serif;
-    font-size: 1.5rem;
-    letter-spacing: 0.2rem;
-}
-
-#form-button button:hover{
     font-size: 1.6rem;
+    letter-spacing: 0.1rem;
 }
 
-#third-section{
+#form-button button:hover {
+    font-size: 1.7rem;
+}
+
+#third-section {
+    margin-top: 3rem;
     width: 100%;
-    display: flex;
-    flex-direction: column;
     align-items: center;
     font-weight: bold;
     font-size: 1.8rem;
-    gap: 3rem;
-}
-
-#third-section a{
-    text-decoration: none;
-    padding: 1rem 0;
-    width: 100%;
+    font-size: 1.4rem;
     text-align: center;
-    border: 1px solid gray;
-    border-radius: 5rem;
-    color: gray;
-    font-size: 1.2rem;
-    letter-spacing: 0.2rem;
 }
 
-#third-section a:hover{
-    border-color: var(--primarycolor);
+#third-section p {
+    display: inline-block;
+    font-weight: normal;
 }
 
-#third-section a:active{
-    border: 3px solid var(--primarycolor);
+#third-section a {
+    color: var(--secondarycolor);
 }

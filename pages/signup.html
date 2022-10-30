@@ -4,46 +4,77 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/signup.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+
     <title>Entrar</title>
 </head>
     <body>
         <script src="https://accounts.google.com/gsi/client" async defer></script>
 
-        <div>
-            <h1>Title</h1>
-        </div>
+        <header>
+            <div>
+                <h1>Title</h1>
+            </div>
 
-        <div id="g_id_onload"
-            data-client_id="164457916901-nlipobm2ts76l5v2cnjkk0lmg3sm562s.apps.googleusercontent.com"
-            data-login_uri="http://localhost/projeto/ProjectPHP/PHPpages/signupdata.php"
-            data-auto_prompt="false">
-        </div>
-        <div class="g_id_signin"
-            data-type="standard"
-            data-size="large"
-            data-theme="filled_blue"
-            data-text="continue_with"
-            data-shape="circle"
-            data-logo_alignment="center"
-            data-width>
-        </div>
-        
-        <form action="../PHPpages/signupdata.php" method="POST">
-            <div>
-                <label for="email">E-mail</label>
-                <input type="email" name="email" id="email" required>
+            <p>
+                Inscreva-se grátis e comece a curtir
+            </p>
+        </header>
+
+        <main>
+            <div id="wrapper">
+                <section id="first-section">
+                    <div id="g_id_onload"
+                        data-client_id="164457916901-nlipobm2ts76l5v2cnjkk0lmg3sm562s.apps.googleusercontent.com"
+                        data-login_uri="http://localhost/projeto/ProjectPHP/PHPpages/signupdata.php"
+                        data-auto_prompt="false">
+                    </div>
+                    <div class="g_id_signin"
+                        data-type="standard"
+                        data-size="large"
+                        data-theme="filled_white"
+                        data-text="signup_with"
+                        data-shape="circle"
+                        data-logo_alignment="center"
+                        data-width="400">
+                    </div>
+                </section>
+
+                <div class="separator">
+                    <hr>
+                    <span>OU</span>
+                    <hr>
+                </div>
+
+                <section id="second-section">
+                    <form action="../PHPpages/signupdata.php" method="POST">
+                        <div id="form-fields">
+                            <label for="email">Qual é o seu e-mail?</label>
+                            <input type="email" name="email" id="email" placeholder="Insira seu email." required>
+                        
+                        
+                            <label for="password">Crie uma senha</label>
+                            <input type="password" name="password" id="password" placeholder="Crie uma senha." required>
+                         
+                        
+                            <label for="username">Como devemos chamar você?</label>
+                            <input type="text" name="username" id="username" placeholder="Insira um nome de perfil" required>
+                            <p>Isso aparece no seu perfil.</p>
+                        </div>
+                        <div id="form-button">
+                            <button type="submit">Inscrever-se</button>
+                        </div> 
+                    </form>
+                </section>
+
+                <section id="third-section">
+                    <p>Já tem uma conta?</p>
+                    <a href="../index.html">Faça o login</a>.
+                </section>
             </div>
-            <div>
-                <label for="password">Senha</label>
-                <input type="password" name="password" id="password" required>
-            </div>  
-            <div>
-                <label for="username">Como devemos chamar você?</label>
-                <input type="text" name="username" id="username" required>
-            </div>
-            <div>
-                <button type="submit">Inscrever-se</button>
-            </div> 
-        </form>
+        </main>
     </body>
 </html>
