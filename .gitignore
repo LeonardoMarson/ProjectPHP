@@ -1,3 +1,4 @@
 #untrack this files to not allow them to go on a push;
 #this file contain settings that are only important to my local PC. --> commited by Everton
 PHPpages/connect.php
+vendor/jwilsson/

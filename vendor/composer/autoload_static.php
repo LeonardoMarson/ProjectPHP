@@ -21,6 +21,10 @@ class ComposerStaticInit9b5b009b4e318f90cb2d647e2442e6bd
         array (
             'phpseclib3\\' => 11,
         ),
+        'S' => 
+        array (
+            'SpotifyWebAPI\\' => 14,
+        ),
         'P' => 
         array (
             'Psr\\Log\\' => 8,
@@ -53,14 +57,18 @@ class ComposerStaticInit9b5b009b4e318f90cb2d647e2442e6bd
         array (
             0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
         ),
+        'SpotifyWebAPI\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jwilsson/spotify-web-api-php/src',
+        ),
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (

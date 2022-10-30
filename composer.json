@@ -1,5 +1,6 @@
 {
     "require": {
-        "google/apiclient": "^2.12.1"
+        "google/apiclient": "^2.12.1",
+        "jwilsson/spotify-web-api-php": "^5.4"
     }
 }
