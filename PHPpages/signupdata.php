@@ -26,6 +26,7 @@
         $username = $_POST["username"];
     }
 
+    // VERIFY THE EMAIL EXISTANCE IN THE DATABASE
     $stmt= $connect->prepare("SELECT email FROM user WHERE email=?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
@@ -33,30 +34,31 @@
     $userEmail = $result->fetch_assoc();
 
     if (isset($userEmail)){
-        echo "<p>email ja registrado</p>";
+        echo "<p>Email já existente</p>";
         header('Refresh: 2; URL=../pages/signup.html');
     }
+    else {
+        // VERIFY THE USERNAME EXISTANCE IN THE DATABASE
+        $stmt= $connect->prepare("SELECT username FROM user WHERE username=?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $userName = $result->fetch_assoc();
+        
+        if (isset($userName)){
+            echo "<p>Nome de usuário ja registrado</p>";
+            header('Refresh: 2; URL=../pages/signup.html');
+        }
+        else {
+            // AFTER ALL THE ABOVE TESTS, THE USER IS FINALLY INSERTED IN THE DATABASE
+            $stmt= $connect->prepare("INSERT INTO user (email, password, username) VALUES (?,?,?)");
+            $stmt->bind_param("sss", $email, $password, $username);
+            $stmt->execute();
 
-    $stmt= $connect->prepare("SELECT username FROM user WHERE username=?");
-    $stmt->bind_param("s", $username);
-    
-    $stmt->execute();
+            $connect->close();
 
-    $result = $stmt->get_result();
-
-    $userName = $result->fetch_assoc();
-    
-    if (isset($userName)){
-        echo "<p>username ja registrado</p>";
-        header('Refresh: 2; URL=../pages/signup.html');
+            echo "Usuário cadastro com sucesso! Voltando à tela de login.";
+            header('Refresh: 2; URL=../index.html');
+        }
     }
-
-    $stmt= $connect->prepare("INSERT INTO user (email, password, username) VALUES (?,?,?)");
-    $stmt->bind_param("sss", $email, $password, $username);
-
-    $stmt->execute();
-
-    $connect->close();
-
-    header('Refresh: 2; URL=../index.html');
 ?>

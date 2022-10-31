@@ -31,6 +31,10 @@
                 echo "<p>Usuário autenticado com sucesso pelo Google!</p>";
                 header('Refresh: 2; URL=../pages/main.php');
             }
+            else {
+                echo "Usuário não encontrado! Prosseguindo para a página de cadastro.";
+                header('Refresh: 2; URL=../pages/signup.html');
+            }
         }
     }
     else {
@@ -48,6 +52,10 @@
             $_SESSION['user'] = $user['username'];
             echo "<p>Usuário autenticado com sucesso!</p>";
             header('Refresh: 2; URL=../pages/main.php');
+        }
+        else {
+            echo "Usuário não encontrado! Tente novamente.";
+            header('Refresh: 2; URL=../index.html');
         }
     
     }
