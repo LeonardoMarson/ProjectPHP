@@ -32,9 +32,9 @@
     $result = $stmt->get_result();
     $userEmail = $result->fetch_assoc();
 
-     if (isset($userEmail)){
+    if (isset($userEmail)){
         echo "<p>email ja registrado</p>";
-        header('Refresh: 2; URL=../pages/signup.php');
+        header('Refresh: 2; URL=../pages/signup.html');
     }
 
     $stmt= $connect->prepare("SELECT username FROM user WHERE username=?");
@@ -46,9 +46,9 @@
 
     $userName = $result->fetch_assoc();
     
-     if (isset($userName)){
+    if (isset($userName)){
         echo "<p>username ja registrado</p>";
-        header('Refresh: 2; URL=../pages/signup.php');
+        header('Refresh: 2; URL=../pages/signup.html');
     }
 
     $stmt= $connect->prepare("INSERT INTO user (email, password, username) VALUES (?,?,?)");
@@ -58,5 +58,5 @@
 
     $connect->close();
 
-    header('Refresh: 2; URL=../index.php');
+    header('Refresh: 2; URL=../index.html');
 ?>

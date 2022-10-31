@@ -1,0 +1,95 @@
+:root {
+    --primarycolor: #000000;
+    --secondarycolor: #1ED760;
+    --background: rgba(0, 0, 0, 0.9);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-template-areas: 
+    "aside main";
+}
+
+header {
+    text-align: center;
+    padding: 1.2rem;
+    font-size: 2.5rem;
+    display: flex;
+    margin-left: auto;
+    justify-content: space-between;
+    grid-area: main;
+    color: white;
+    border: 1px solid blue;
+}
+
+header #search-bar {
+    width: 400px;
+    border-radius: 5rem;
+    border: none;
+    padding: 1.2rem 0 1.2rem 4.5rem;
+    background: url(../images/lupa-search-bar.png) no-repeat 1.2rem center;
+    background-color: white;
+}
+
+header input#search-bar:focus {
+    outline: none;
+}
+
+header #username {
+    align-self: center;
+}
+
+header #user-info {
+    display: flex;
+    gap: 1rem;
+    background-color: var(--primarycolor);
+    padding: 0 0.8rem 0 0.2rem;
+    border-radius: 3rem;
+}
+
+aside {
+    grid-area: aside;
+    height: 100vh;
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 3rem 2rem 0 3rem;
+}
+
+aside h1 {
+    font-size: 4rem;
+    margin-bottom: 3rem;
+}
+
+aside .links {
+    margin-bottom: 1.8rem;
+    font-size: 1.6rem;
+    display: flex;
+    gap: 1.4rem;
+    align-items: flex-end;
+    text-decoration: none;
+    color: gray;
+}
+
+aside .links:hover {
+    color: white;
+    transition: all 0.2s ease-in-out;
+}
+
+main {
+    border: 1px solid red;
+    background-color: var(--background);
+}
