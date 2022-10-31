@@ -4,6 +4,8 @@
 
     global $email, $password;
 
+    session_start();
+
     if(isset($_POST['credential'])){
         
         $googleClient = new Google\Client();
@@ -24,8 +26,10 @@
             $user = $result->fetch_assoc();
          
             if (isset($user)){
+                $_SESSION['email'] = $payload['email'];
+                $_SESSION['user'] = $payload['name'];
                 echo "<p>Usuário autenticado com sucesso pelo Google!</p>";
-                header('Refresh: 2; URL=../pages/qualquer.php');
+                header('Refresh: 2; URL=../pages/main.php');
             }
         }
     }
@@ -33,15 +37,17 @@
         $email = $_POST["email"];
         $password = $_POST["password"];
 
-        $stmt= $connect->prepare("SELECT email, password FROM user WHERE email=? AND password=?");
+        $stmt= $connect->prepare("SELECT email, password, username FROM user WHERE email=? AND password=?");
         $stmt->bind_param("ss", $email, $password);
         $stmt->execute();
         $result = $stmt->get_result();
         $user = $result->fetch_assoc();
-    
+        
         if (isset($user)){
+            $_SESSION['email'] = $email;
+            $_SESSION['user'] = $user['username'];
             echo "<p>Usuário autenticado com sucesso!</p>";
-            header('Refresh: 2; URL=../pages/qualquer.php');
+            header('Refresh: 2; URL=../pages/main.php');
         }
     
     }
