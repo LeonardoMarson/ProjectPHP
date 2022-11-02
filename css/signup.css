@@ -1,7 +1,7 @@
 :root {
     --primarycolor: #000000;
     --secondarycolor: #1ED760;
-
+    --separator-color: rgb(204, 204, 204); 
 }
 
 * {
@@ -68,7 +68,7 @@ main {
     width: 100%;
     border: 0;
     height: 1px;
-    background: rgb(204, 204, 204);
+    background: var(--separator-color);
 }
 
 form{

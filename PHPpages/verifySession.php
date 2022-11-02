@@ -3,6 +3,6 @@
 
 	if(empty($_SESSION["email"]) OR empty($_SESSION["user"]))
 	{
-		header("Location:../index.php");
+		header("Location:../index.html");
 	}
 ?>

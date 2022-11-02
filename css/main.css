@@ -2,6 +2,9 @@
     --primarycolor: #000000;
     --secondarycolor: #1ED760;
     --background: rgba(0, 0, 0, 0.9);
+    --font-color: #B3B3B3;
+    --separator-color: rgba(204, 204, 204, 0.2);
+    --gap-for-tracklist: 3rem;
 }
 
 * {
@@ -25,26 +28,34 @@ body {
 header {
     text-align: center;
     padding: 1.2rem;
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     display: flex;
     margin-left: auto;
     justify-content: space-between;
     grid-area: main;
     color: white;
-    border: 1px solid blue;
 }
 
 header #search-bar {
     width: 400px;
     border-radius: 5rem;
     border: none;
-    padding: 1.2rem 0 1.2rem 4.5rem;
+    padding: 1.2rem 0.5rem 1.2rem 4.5rem;
     background: url(../images/lupa-search-bar.png) no-repeat 1.2rem center;
     background-color: white;
+    font-size: 1.4rem;
 }
 
-header input#search-bar:focus {
+header #search-bar:focus {
     outline: none;
+}
+
+header #search-bar::-webkit-search-cancel-button {
+    appearance: none;
+    cursor: pointer;
+    height: 3rem;
+    width: 3rem;
+    background: url(../images/close.png) no-repeat center center;
 }
 
 header #username {
@@ -55,8 +66,13 @@ header #user-info {
     display: flex;
     gap: 1rem;
     background-color: var(--primarycolor);
-    padding: 0 0.8rem 0 0.2rem;
+    padding: 0.2rem 1.6rem 0.2rem 1rem;
+    width: min-content;
     border-radius: 3rem;
+}
+
+header #user-info img {
+    padding: 0.1rem 0 0.1rem 0;
 }
 
 aside {
@@ -67,6 +83,8 @@ aside {
     display: flex;
     flex-direction: column;
     padding: 3rem 2rem 0 3rem;
+    z-index: 1;
+    box-shadow: 0 0 1.5rem var(--separator-color);
 }
 
 aside h1 {
@@ -81,7 +99,7 @@ aside .links {
     gap: 1.4rem;
     align-items: flex-end;
     text-decoration: none;
-    color: gray;
+    color: var(--font-color);
 }
 
 aside .links:hover {
@@ -89,7 +107,106 @@ aside .links:hover {
     transition: all 0.2s ease-in-out;
 }
 
+#separator-aside {
+    margin-top: 3rem;
+    border-color: var(--separator-color);
+}
+
+aside .links.playlist {
+    margin-top: 5rem;
+}
+
 main {
-    border: 1px solid red;
     background-color: var(--background);
 }
+
+#main-area {
+    color: white;
+    font-size: 1.4rem;
+}
+
+#tracks-info {
+    margin: 4rem 4.2rem 0 4rem;
+    display: flex;
+    justify-content: space-between;
+    color: var(--font-color);
+}
+
+#tracks-info #left-side {
+    display: flex;
+    gap: var(--gap-for-tracklist);
+    width: 25vw;
+    text-transform: uppercase;
+}
+
+#tracks-info #right-side {
+    display: flex;
+    justify-content: space-between;
+    text-transform: uppercase;
+    width: 40vw;
+}
+
+#tracks-info #right-side img {
+    margin-right: 3.5rem;
+}
+
+#separator-songs {
+    margin: 1rem 3rem 3rem 3rem;
+    border-color: rgba(204, 204, 204, 0.2);
+}
+
+#tracks {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 1.5rem 4rem 0 4rem;
+    gap: 1.5rem;
+}
+
+#track-info {
+    display: flex;
+    align-items: center;
+    width: 25vw;
+    gap: var(--gap-for-tracklist);
+    flex-grow: 1;
+}
+
+#track-info > span:first-child {
+    width: 1rem;
+}
+
+#track-name-artist {
+    display: flex;
+    flex-direction: column;
+}
+
+#track-name-artist span:nth-child(2) {
+    color: var(--font-color);
+}
+
+#track-length {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 40vw;
+    color: var(--font-color);
+}
+
+#album-name {
+    justify-self: flex-start;
+}
+
+#track-length-and-add {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+#add-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+

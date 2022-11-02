@@ -27,7 +27,11 @@
          
             if (isset($user)){
                 $_SESSION['email'] = $payload['email'];
-                $_SESSION['user'] = $payload['name'];
+
+                $username = $payload['name'];
+                $username = explode(' ', $username);
+                $_SESSION['user'] = $username[0];
+
                 echo "<p>Usuário autenticado com sucesso pelo Google!</p>";
                 header('Refresh: 2; URL=../pages/main.php');
             }
@@ -49,7 +53,10 @@
         
         if (isset($user)){
             $_SESSION['email'] = $email;
-            $_SESSION['user'] = $user['username'];
+
+            $username = $user['username'];;
+            $username = explode(' ', $username);
+            $_SESSION['user'] = $username[0];
             echo "<p>Usuário autenticado com sucesso!</p>";
             header('Refresh: 2; URL=../pages/main.php');
         }

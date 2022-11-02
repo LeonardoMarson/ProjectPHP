@@ -1,5 +1,7 @@
 <?php
    require_once '../PHPpages/verifySession.php';
+
+   session_start();
 ?>
 
 <!DOCTYPE html>
@@ -24,15 +26,23 @@
             <img src="../images/lupa.png" alt="">
             Buscar
          </a>
-         <a href="" class="links">
+         <hr id="separator-aside">
+         <a href="" class="links playlist">
             <img src="../images/loupe.png" alt="">
-            Criar playlist
+            Minha playlist
          </a>
       </aside>
        
       <main>
          <header>
-            <input id="search-bar" type="text" placeholder="O que você quer ouvir?">
+            <form action="../PHPpages/playlist.php" method="POST">
+               <input id="search-bar" 
+                     type="search" 
+                     maxlength="40" 
+                     placeholder="O que você quer ouvir?"
+                     name="search-value">
+            </form>
+            
             <?php 
                echo "
                <div id='user-info'>
@@ -41,6 +51,73 @@
                </div>";
             ?>
          </header>
+
+         <section id="main-area">
+
+            <div id="tracks-info">
+               <div id="left-side">
+                  <span>#</span>
+                  <span>Title</span>
+               </div>
+               <div id="right-side">
+                  <span>Album</span>
+                  <img src="../images/clock.png" alt="" id="timestamp-icon">
+               </div>
+            </div>
+
+            <hr id="separator-songs">
+
+            <?php
+               if(isset($_SESSION['userSearchResult'])){
+
+                  $track = $_SESSION['userSearchResult']->tracks->items;
+
+                  for($i = 0; $i < count($track); $i++){
+                     $trackImage = $track[$i]->album->images[2]->url;
+                     $trackName = $track[$i]->name;
+                     $trackArtist = $track[$i]->album->artists[0]->name;
+                     $trackAlbum = $track[$i]->album->name;
+                     $trackLength = $track[$i]->duration_ms;
+
+                     $trackMs = $trackLength/60000;
+                     $trackMin = explode('.', $trackMs);
+                     $trackSeg = $trackMin[1]*60;
+                     
+                     $trackLength = $trackMin[0].'.'.$trackSeg;
+                     $trackLength = number_format($trackLength, 2);
+
+                     $trackLength = explode('.',$trackLength);
+                     $trackLength = $trackLength[0].' : '.$trackLength[1];
+
+                     $trackIndex = $i + 1;
+
+                     echo 
+                     "
+                        <div id='tracks'>
+                           <div id='track-info'>
+                              <span>$trackIndex</span>
+                              <img src='$trackImage' alt=''>
+                              <div id='track-name-artist'>
+                                 <span>$trackName</span>
+                                 <span>$trackArtist</span>
+                              </div>
+                           </div>
+                           
+                           <div id='track-length'>
+                              <span id='album-name'>$trackAlbum</span>
+                              <div id='track-length-and-add'>
+                                 <span>$trackLength</span>
+                                 <form action='' method='POST'>
+                                    <button type='submit' id='add-button'><img src='../images/loupe.png' alt=''></button>
+                                 </form>
+                              </div>
+                           </div>
+                        </div>
+                     ";
+                  }
+               }
+            ?>         
+         </section>
       </main>
    </body>
 </html>
