@@ -20,9 +20,12 @@ html {
 
 body {
     display: grid;
-    grid-template-columns: 1fr 5fr;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr 2fr min-content;
     grid-template-areas: 
-    "aside main";
+    "aside  main   main   main   main"
+    "aside  main   main   main   main"
+    "footer footer footer footer footer";
 }
 
 header {
@@ -32,7 +35,6 @@ header {
     display: flex;
     margin-left: auto;
     justify-content: space-between;
-    grid-area: main;
     color: white;
 }
 
@@ -117,6 +119,7 @@ aside .links.playlist {
 
 main {
     background-color: var(--background);
+    grid-area: main;
 }
 
 #main-area {
@@ -159,7 +162,8 @@ main {
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
-    margin: 1.5rem 4rem 0 4rem;
+    margin: 0 2rem 0 2rem;
+    padding: 0.5rem 2rem;
     gap: 1.5rem;
 }
 
@@ -172,11 +176,12 @@ main {
     cursor: default;
 }
 
-#tracks:hover {
-    background-color: red;
+#main-area #tracks:hover {
+    background-color: rgba(204, 204, 204, 0.1);
 }
+
 #tracks:active {
-    background-color: #1ED760;
+    color: green;
 }
 
 #track-info > span:first-child {
@@ -215,5 +220,9 @@ main {
     border: none;
     padding: 0;
     margin: 0;
+}
+
+footer {
+    grid-area: footer;
 }
 

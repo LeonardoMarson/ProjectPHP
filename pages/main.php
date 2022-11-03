@@ -14,6 +14,8 @@
    </head>
    
    <body>
+      <script src="../pages/script.js" defer></script>
+
       <aside>
          <h1>Title</h1>
          <a href="" class="links">
@@ -64,11 +66,6 @@
             </div>
 
             <hr id="separator-songs">
-            <script>
-               function executaAcao(){
-                     let getid= document.getelementbyid
-               }
-            </script>
             <?php
                if(isset($_SESSION['userSearchResult'])){
 
@@ -95,7 +92,7 @@
 
                      echo 
                      "
-                        <div id='tracks' onclick='executaAcao()'>
+                        <div id='tracks' value='{$i}'>
                            <div id='track-info'>
                               <span id='click'>$trackIndex</span>
                               <img src='$trackImage' alt=''>
@@ -109,8 +106,10 @@
                               <span id='album-name'>$trackAlbum</span>
                               <div id='track-length-and-add'>
                                  <span>$trackLength</span>
-                                 <form action='' method='POST'>
-                                    <button type='submit' id='add-button'><img src='../images/loupe.png' alt=''></button>
+                                 <form action='../PHPpages/addSong.php' method='POST'>
+                                    <button onclick='window.location='../PHPpages/addSong.php';' id='add-button'>
+                                       <img src='../images/loupe.png' alt=''>
+                                    </button>
                                  </form>
                               </div>
                            </div>
@@ -121,20 +120,34 @@
             ?>         
          </section>
       </main>
-      <footer> 
-         <div id='track-info'>
-               <span>$trackIndex</span>
+      <footer>
+      <?php
+         $cookie = $_COOKIE['selectedIndex'];
+
+         $trackImage = $track[$cookie]->album->images[2]->url;
+         $trackName = $track[$cookie]->name;
+         $trackArtist = $track[$cookie]->album->artists[0]->name;
+         $trackLink = $track[$cookie]->preview_url;
+
+         $trackInfoSQL = [$trackImage, $trackName, $trackArtist, $trackLink];
+         $_SESSION['trackInfoSQl'] = $trackInfoSQL;
+
+         echo 
+         "
+            <div id='track-info'>
                <img src='$trackImage' alt=''>
-            <div id='track-name-artist'>
-               <span>$trackName</span>
-               <span>$trackArtist</span>
-            </div>
-            <div>
-               <audio controls>
-                  <source src="" type="audiompeg">
-               </audio>
-            </div>
-         </div>  
+               <div id='track-name-artist'>
+                  <span>$trackName</span>
+                  <span>$trackArtist</span>
+               </div>
+               <div>
+                  <audio src='$trackLink' controls autoplay>
+                     
+                  </audio>
+               </div>
+            </div>     
+         ";
+      ?>
       </footer>
    </body>
 </html>
