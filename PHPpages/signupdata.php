@@ -55,6 +55,10 @@
             $stmt->bind_param("sss", $email, $password, $username);
             $stmt->execute();
 
+            $stmt= $connect->prepare("INSERT INTO playlist (user_email) VALUES (?)");
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+
             $connect->close();
 
             echo "Usuário cadastro com sucesso! Voltando à tela de login.";
