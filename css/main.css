@@ -77,7 +77,6 @@ header #user-info img {
 
 aside {
     grid-area: aside;
-    height: 100vh;
     background-color: black;
     color: white;
     display: flex;
@@ -170,6 +169,14 @@ main {
     width: 25vw;
     gap: var(--gap-for-tracklist);
     flex-grow: 1;
+    cursor: default;
+}
+
+#tracks:hover {
+    background-color: red;
+}
+#tracks:active {
+    background-color: #1ED760;
 }
 
 #track-info > span:first-child {

@@ -1,7 +1,5 @@
 <?php
    require_once '../PHPpages/verifySession.php';
-
-   session_start();
 ?>
 
 <!DOCTYPE html>
@@ -66,7 +64,11 @@
             </div>
 
             <hr id="separator-songs">
-
+            <script>
+               function executaAcao(){
+                     let getid= document.getelementbyid
+               }
+            </script>
             <?php
                if(isset($_SESSION['userSearchResult'])){
 
@@ -93,9 +95,9 @@
 
                      echo 
                      "
-                        <div id='tracks'>
+                        <div id='tracks' onclick='executaAcao()'>
                            <div id='track-info'>
-                              <span>$trackIndex</span>
+                              <span id='click'>$trackIndex</span>
                               <img src='$trackImage' alt=''>
                               <div id='track-name-artist'>
                                  <span>$trackName</span>
@@ -119,5 +121,20 @@
             ?>         
          </section>
       </main>
+      <footer> 
+         <div id='track-info'>
+               <span>$trackIndex</span>
+               <img src='$trackImage' alt=''>
+            <div id='track-name-artist'>
+               <span>$trackName</span>
+               <span>$trackArtist</span>
+            </div>
+            <div>
+               <audio controls>
+                  <source src="" type="audiompeg">
+               </audio>
+            </div>
+         </div>  
+      </footer>
    </body>
 </html>
