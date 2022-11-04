@@ -238,5 +238,15 @@ footer {
     background-color: var(--background);
     box-shadow: 0 0 1.5rem var(--separator-color);
     padding: 1.5rem;
+    color: white;
+}
+
+/* ===== PLAYLIST CSS ===== */
+#playlist-header {
+    justify-content: flex-end;
+}
+
+#playlist-header div{
+    margin-right: 2rem;
 }
 

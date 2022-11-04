@@ -1,3 +1,4 @@
+// GET TRACK ID OF THE SELECTED LINE
 let getId = document.querySelectorAll('#tracks');
 let trackIndex;
 
@@ -12,8 +13,8 @@ function executeAction(e){
     document.location.reload(); 
 }
 
+// GET Y AXIS VALUE ACCORDING TO THE WINDOW
 let header = document.querySelector('header');
-
 window.addEventListener("scroll", getScrollY);
 
 function getScrollY(){

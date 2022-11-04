@@ -28,7 +28,7 @@
             Buscar
          </a>
          <hr id="separator-aside">
-         <a href="" class="links playlist">
+         <a href="../pages/playlistPage.php" class="links playlist">
             <img src="../images/loupe.png" alt="">
             Minha playlist
          </a>
@@ -138,7 +138,7 @@
                "
                   <div id='track-info'>
                      <img src='$trackImage' alt=''>
-                     <div id='track-name'>
+                     <div id='track-name-artist'>
                         <span>$trackName</span>
                         <span>$trackArtist</span>
                      </div>
