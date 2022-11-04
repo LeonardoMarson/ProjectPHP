@@ -13,7 +13,7 @@
 			"artist"
 		];
 		$options = [
-			'limit' => 10,
+			'limit' => 50,
 			'market' => 'US'
 		];
 

@@ -15,6 +15,7 @@
    
    <body>
       <script src="../pages/script.js" defer></script>
+      <script src="../pages/test.js"></script>
 
       <aside>
          <h1>Title</h1>
@@ -35,21 +36,21 @@
        
       <main>
          <header>
-            <form action="../PHPpages/playlist.php" method="POST">
-               <input id="search-bar" 
-                     type="search" 
-                     maxlength="40" 
-                     placeholder="O que você quer ouvir?"
-                     name="search-value">
-            </form>
-            
-            <?php 
-               echo "
-               <div id='user-info'>
-                  <img src='../images/account-icon.png'>
-                  <p id='username'>{$_SESSION['user']}</p>
-               </div>";
-            ?>
+               <form action="../PHPpages/playlist.php" method="POST">
+                  <input id="search-bar" 
+                        type="search" 
+                        maxlength="40" 
+                        placeholder="O que você quer ouvir?"
+                        name="search-value">
+               </form>
+               
+               <?php 
+                  echo "
+                  <div id='user-info'>
+                     <img src='../images/account-icon.png'>
+                     <p id='username'>{$_SESSION['user']}</p>
+                  </div>";
+               ?>
          </header>
 
          <section id="main-area">
@@ -121,33 +122,43 @@
          </section>
       </main>
       <footer>
-      <?php
-         $cookie = $_COOKIE['selectedIndex'];
+         <?php
+            $cookie = $_COOKIE['selectedIndex'];
 
-         $trackImage = $track[$cookie]->album->images[2]->url;
-         $trackName = $track[$cookie]->name;
-         $trackArtist = $track[$cookie]->album->artists[0]->name;
-         $trackLink = $track[$cookie]->preview_url;
-
-         $trackInfoSQL = [$trackImage, $trackName, $trackArtist, $trackLink];
-         $_SESSION['trackInfoSQl'] = $trackInfoSQL;
-
-         echo 
-         "
-            <div id='track-info'>
-               <img src='$trackImage' alt=''>
-               <div id='track-name-artist'>
-                  <span>$trackName</span>
-                  <span>$trackArtist</span>
-               </div>
+            if(isset($cookie)){
+               $trackImage = $track[$cookie]->album->images[2]->url;
+               $trackName = $track[$cookie]->name;
+               $trackArtist = $track[$cookie]->album->artists[0]->name;
+               $trackLink = $track[$cookie]->preview_url;
+      
+               $trackInfoSQL = [$trackImage, $trackName, $trackArtist, $trackLink];
+               $_SESSION['trackInfoSQl'] = $trackInfoSQL;
+      
+               echo 
+               "
+                  <div id='track-info'>
+                     <img src='$trackImage' alt=''>
+                     <div id='track-name'>
+                        <span>$trackName</span>
+                        <span>$trackArtist</span>
+                     </div>
+                     <div>
+                        <audio src='$trackLink' controls autoplay>
+                           
+                        </audio>
+                     </div>
+                  </div>     
+               ";
+            }
+            else {
+               echo 
+               "
                <div>
-                  <audio src='$trackLink' controls autoplay>
-                     
-                  </audio>
+                  <audio src='' controls autoplay></audio>
                </div>
-            </div>     
-         ";
-      ?>
+               ";
+            }
+         ?>
       </footer>
    </body>
 </html>

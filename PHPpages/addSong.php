@@ -41,6 +41,7 @@
     $stmt->bind_param("ii", $playlistID, $trackID);
     $stmt->execute();
 
+    unset($_SESSION['trackInfoSQL']);
     $connect->close();
 
     echo "Musica cadastrada com sucesso! Voltando à tela de login.";
