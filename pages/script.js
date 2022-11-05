@@ -13,6 +13,13 @@ function executeAction(e){
     document.location.reload(); 
 }
 
+let startbutton= document.getElementById('startButton');
+startbutton.addEventListener('click',deleteCookie);
+function deleteCookie(){
+    console.log('entrou');
+    document.cookie = "selectedIndex= ; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    document.location.reload();
+}
 // GET Y AXIS VALUE ACCORDING TO THE WINDOW
 let header = document.querySelector('header');
 window.addEventListener("scroll", getScrollY);

@@ -15,11 +15,11 @@
    
    <body>
       <script src="../pages/script.js" defer></script>
-      <script src="../pages/test.js"></script>
 
       <aside>
          <h1>Title</h1>
-         <a href="" class="links">
+
+         <a href="" class="links" id="startButton">
             <img src="../images/home.png" alt="home">
             Início
          </a>
@@ -69,6 +69,7 @@
             <hr id="separator-songs">
             <?php
                if(isset($_SESSION['userSearchResult'])){
+                  echo 'entro';
 
                   $track = $_SESSION['userSearchResult']->tracks->items;
 
@@ -123,7 +124,12 @@
       </main>
       <footer>
          <?php
+            if(isset($_COOKIE['selectedIndex'])){
             $cookie = $_COOKIE['selectedIndex'];
+            
+            
+            if(isset($_SESSION['userSearchResult'])){
+            $track = $_SESSION['userSearchResult']->tracks->items;
 
             if(isset($cookie)){
                $trackImage = $track[$cookie]->album->images[2]->url;
@@ -144,11 +150,11 @@
                      </div>
                      <div>
                         <audio src='$trackLink' controls autoplay>
-                           
                         </audio>
                      </div>
                   </div>     
                ";
+            }
             }
             else {
                echo 
@@ -158,6 +164,16 @@
                </div>
                ";
             }
+            }
+            else {
+               echo 
+               "
+               <div>
+                  <audio src='' controls autoplay></audio>
+               </div>
+               ";
+            }
+            
          ?>
       </footer>
    </body>
