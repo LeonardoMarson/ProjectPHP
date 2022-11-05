@@ -69,8 +69,6 @@
             <hr id="separator-songs">
             <?php
                if(isset($_SESSION['userSearchResult'])){
-                  echo 'entro';
-
                   $track = $_SESSION['userSearchResult']->tracks->items;
 
                   for($i = 0; $i < count($track); $i++){
@@ -125,55 +123,53 @@
       <footer>
          <?php
             if(isset($_COOKIE['selectedIndex'])){
-            $cookie = $_COOKIE['selectedIndex'];
+               $cookie = $_COOKIE['selectedIndex'];
             
-            
-            if(isset($_SESSION['userSearchResult'])){
-            $track = $_SESSION['userSearchResult']->tracks->items;
+               if(isset($_SESSION['userSearchResult'])){
+                  $track = $_SESSION['userSearchResult']->tracks->items;
 
-            if(isset($cookie)){
-               $trackImage = $track[$cookie]->album->images[2]->url;
-               $trackName = $track[$cookie]->name;
-               $trackArtist = $track[$cookie]->album->artists[0]->name;
-               $trackLink = $track[$cookie]->preview_url;
-      
-               $trackInfoSQL = [$trackImage, $trackName, $trackArtist, $trackLink];
-               $_SESSION['trackInfoSQl'] = $trackInfoSQL;
-      
-               echo 
-               "
-                  <div id='track-info'>
-                     <img src='$trackImage' alt=''>
-                     <div id='track-name-artist'>
-                        <span>$trackName</span>
-                        <span>$trackArtist</span>
-                     </div>
-                     <div>
-                        <audio src='$trackLink' controls autoplay>
-                        </audio>
-                     </div>
-                  </div>     
-               ";
-            }
-            }
-            else {
-               echo 
-               "
-               <div>
-                  <audio src='' controls autoplay></audio>
-               </div>
-               ";
-            }
-            }
-            else {
-               echo 
-               "
-               <div>
-                  <audio src='' controls autoplay></audio>
-               </div>
-               ";
-            }
+                  if(isset($cookie)){
+                     $trackImage = $track[$cookie]->album->images[2]->url;
+                     $trackName = $track[$cookie]->name;
+                     $trackArtist = $track[$cookie]->album->artists[0]->name;
+                     $trackLink = $track[$cookie]->preview_url;
             
+                     $trackInfoSQL = [$trackImage, $trackName, $trackArtist, $trackLink];
+                     $_SESSION['trackInfoSQl'] = $trackInfoSQL;
+            
+                     echo 
+                     "
+                        <div id='track-info'>
+                           <img src='$trackImage' alt=''>
+                           <div id='track-name-artist'>
+                              <span>$trackName</span>
+                              <span>$trackArtist</span>
+                           </div>
+                           <div>
+                              <audio src='$trackLink' controls autoplay>
+                              </audio>
+                           </div>
+                        </div>     
+                     ";
+                  }
+               }
+               else {
+                  echo 
+                  "
+                  <div>
+                     <audio src='' controls autoplay></audio>
+                  </div>
+                  ";
+               }
+            }
+            else {
+               echo 
+               "
+               <div>
+                  <audio src='' controls autoplay></audio>
+               </div>
+               ";
+            }
          ?>
       </footer>
    </body>
