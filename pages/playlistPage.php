@@ -73,7 +73,7 @@
 
                // SEARCH FOR TRACKS INSIDE USER PLAYLIST
                $stmt = $connect->prepare(
-                  "SELECT track_image, track_name, artist, track_preview
+                  "SELECT track_image, track_name, artist, track_preview, trackAlbum, trackLength
                      FROM playlist 
                         INNER JOIN relationship ON playlist.playlist_id = relationship.playlist_id
                         INNER JOIN tracks ON tracks.id = relationship.track_id
@@ -86,6 +86,35 @@
                for($i = 0; $i < $result->num_rows; $i++){
                   $row[$i] = $result->fetch_row();
                   $playlistTracks[$i] = $row[$i];
+               
+                  $trackImage = $playlistTracks[$i][0];
+                  $trackName =  $playlistTracks[$i][1];
+                  $trackArtist= $playlistTracks[$i][2];
+                  $trackLink =  $playlistTracks[$i][3];
+                  $trackAlbum=  $playlistTracks[$i][4];
+                  $trackLength= $playlistTracks[$i][5];
+                  $trackIndex = $i + 1;
+
+               echo 
+                     "
+                        <div id='tracks' value='{$i}'>
+                           <div id='track-info'>
+                              <span id='click'>$trackIndex</span>
+                              <img src='$trackImage' alt=''>
+                              <div id='track-name-artist'>
+                                 <span>$trackName</span>
+                                 <span>$trackArtist</span>
+                              </div>
+                           </div>
+                           
+                           <div id='track-length'>
+                              <span id='album-name'>$trackAlbum</span>
+                              <div id='track-length-and-add'>
+                                 <span>$trackLength</span>
+                              </div>
+                           </div>
+                        </div>
+                     ";
                }
 
                echo "<pre>";

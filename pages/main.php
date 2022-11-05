@@ -90,6 +90,7 @@
 
                      $trackIndex = $i + 1;
 
+
                      echo 
                      "
                         <div id='tracks' value='{$i}'>
@@ -133,8 +134,20 @@
                      $trackName = $track[$cookie]->name;
                      $trackArtist = $track[$cookie]->album->artists[0]->name;
                      $trackLink = $track[$cookie]->preview_url;
+                     $trackAlbum = $track[$cookie]->album->name;
+                     $trackLength = $track[$cookie]->duration_ms;
+
+                     $trackMs = $trackLength/60000;
+                     $trackMin = explode('.', $trackMs);
+                     $trackSeg = $trackMin[1]*60;
+                     
+                     $trackLength = $trackMin[0].'.'.$trackSeg;
+                     $trackLength = number_format($trackLength, 2);
+
+                     $trackLength = explode('.',$trackLength);
+                     $trackLength = $trackLength[0].' : '.$trackLength[1];
             
-                     $trackInfoSQL = [$trackImage, $trackName, $trackArtist, $trackLink];
+                     $trackInfoSQL = [$trackImage, $trackName, $trackArtist, $trackLink,$trackAlbum,$trackLength];
                      $_SESSION['trackInfoSQl'] = $trackInfoSQL;
             
                      echo 
