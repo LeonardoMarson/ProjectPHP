@@ -9,7 +9,6 @@ Array.from(getId).forEach(element => {
 function executeAction(e){
     trackIndex = e.getAttribute('value');
     document.cookie = "selectedIndex=" + trackIndex;
-    audio.setAttribute('autoplay', 'autoplay');
     document.location.reload(); 
 }
 

@@ -16,7 +16,6 @@
    
    <body>
       <script src="../pages/script.js" defer></script>
-      <script src="../pages/test.js"></script>
 
       <aside>
          <h1>Title</h1>
