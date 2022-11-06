@@ -185,6 +185,7 @@
                }
             }
             else {
+               if(isset($_SESSION['trackInfoSQl'])){
                $lastTrack= $_SESSION['trackInfoSQl'];
 
                echo 
@@ -202,6 +203,14 @@
                   </div>
                </div> 
                ";
+               }else{
+                  echo 
+                  "
+                  <div class='displayfooter'>
+                     <audio src='' controls></audio>
+                  </div>
+                  ";
+               }
             }
          ?>
       </footer>

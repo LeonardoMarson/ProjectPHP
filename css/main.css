@@ -250,3 +250,10 @@ footer {
     margin-right: 2rem;
 }
 
+.displayfooter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+

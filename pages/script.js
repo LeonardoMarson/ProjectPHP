@@ -21,6 +21,7 @@ homebutton.addEventListener('click',deleteCookie);
 searchbutton.addEventListener('click',deleteCookie);
 playlistbutton.addEventListener('click',deleteCookie);
 searchbar.addEventListener('click',deleteCookie);
+
 function deleteCookie(){
     document.cookie = "selectedIndex= ; expires=Thu, 01 Jan 1970 00:00:00 UTC;";  
 }
