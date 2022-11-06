@@ -9,16 +9,21 @@ Array.from(getId).forEach(element => {
 function executeAction(e){
     trackIndex = e.getAttribute('value');
     document.cookie = "selectedIndex=" + trackIndex;
-
+    audio.setAttribute('autoplay', 'autoplay');
     document.location.reload(); 
 }
 
-let startbutton= document.getElementById('startButton');
-startbutton.addEventListener('click',deleteCookie);
+let homebutton= document.getElementById('homeButton');
+let searchbutton= document.getElementById('searchButton');
+let playlistbutton= document.getElementById('playlistButton');
+let searchbar= document.getElementById('search-bar');
+
+homebutton.addEventListener('click',deleteCookie);
+searchbutton.addEventListener('click',deleteCookie);
+playlistbutton.addEventListener('click',deleteCookie);
+searchbar.addEventListener('click',deleteCookie);
 function deleteCookie(){
-    console.log('entrou');
-    document.cookie = "selectedIndex= ; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-    document.location.reload();
+    document.cookie = "selectedIndex= ; expires=Thu, 01 Jan 1970 00:00:00 UTC;";  
 }
 // GET Y AXIS VALUE ACCORDING TO THE WINDOW
 let header = document.querySelector('header');

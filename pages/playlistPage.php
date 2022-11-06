@@ -9,7 +9,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <link rel="stylesheet" href="../css/main.css">
+         <link rel="stylesheet" href="../css/playlist.css">
 
         <title>Document</title>
    </head>
@@ -20,16 +20,16 @@
 
       <aside>
          <h1>Title</h1>
-         <a href="../pages/main.php" class="links">
+         <a href="../pages/main.php" class="links" id="homeButton">
             <img src="../images/home.png" alt="home">
             Início
          </a>
-         <a href="" class="links">
+         <a href="../pages/main.php" class="links" id="searchButton">
             <img src="../images/lupa.png" alt="">
             Buscar
          </a>
          <hr id="separator-aside">
-         <a href="" class="links playlist">
+         <a href="playlistPage.php" class="links playlist" id="playlistButton">
             <img src="../images/loupe.png" alt="">
             Minha playlist
          </a>
@@ -95,6 +95,7 @@
                   $trackLength= $playlistTracks[$i][5];
                   $trackIndex = $i + 1;
 
+                  $_SESSION['userPlaylist'] = $playlistTracks;
                echo 
                      "
                         <div id='tracks' value='{$i}'>
@@ -116,23 +117,54 @@
                         </div>
                      ";
                }
-
-               echo "<pre>";
-               print_r($playlistTracks);
-               echo "</pre>";
-
-               unset($_SESSION['userSearchResult']);
             ?>         
          </section>
       </main>
       <footer>
          <?php
-            echo 
-            "
-            <div>
-               <audio src='' controls autoplay></audio>
-            </div>
-            ";
+             if(isset($_COOKIE['selectedIndex'])){
+               $cookie = $_COOKIE['selectedIndex'];
+
+               if(isset($_SESSION['userPlaylist'])){
+                  $track = $_SESSION['userPlaylist'];
+
+                  if(isset($cookie)){
+                     $trackImage = $track[$cookie][0];
+                     $trackName = $track[$cookie][1];
+                     $trackArtist = $track[$cookie][2];
+                     $trackLink = $track[$cookie][3];
+                     
+                     echo 
+                     "
+                        <div id='track-info'>
+                           <img src='$trackImage' alt=''>
+                           <div id='track-name-artist'>
+                              <span>$trackName</span>
+                              <span>$trackArtist</span>
+                           </div>
+                           <div>
+                              <audio src='$trackLink' controls autoplay>
+                              </audio>
+                           </div>
+                        </div>     
+                     ";
+                  }
+               }else{
+                  echo 
+                  "
+                  <div class='displayfooter'>
+                     <audio src='' controls autoplay></audio>
+                  </div>
+                  ";
+               }
+             }else{
+               echo 
+               "
+               <div class='displayfooter'>
+                  <audio src='' controls autoplay></audio>
+               </div>
+               ";
+             }
          ?>
       </footer>
    </body>

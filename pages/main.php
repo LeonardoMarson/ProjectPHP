@@ -19,16 +19,16 @@
       <aside>
          <h1>Title</h1>
 
-         <a href="" class="links" id="startButton">
+         <a href="main.php" class="links" id="homeButton">
             <img src="../images/home.png" alt="home">
             Início
          </a>
-         <a href="" class="links">
+         <a href="main.php" class="links" id="searchButton">
             <img src="../images/lupa.png" alt="">
             Buscar
          </a>
          <hr id="separator-aside">
-         <a href="../pages/playlistPage.php" class="links playlist">
+         <a href="../pages/playlistPage.php" class="links playlist" id="playlistButton" >
             <img src="../images/loupe.png" alt="">
             Minha playlist
          </a>
@@ -80,7 +80,11 @@
 
                      $trackMs = $trackLength/60000;
                      $trackMin = explode('.', $trackMs);
+                     if(count($trackMin)< 2){
+                        $trackSeg = $trackMin[0]*60;
+                     }else{
                      $trackSeg = $trackMin[1]*60;
+                     }
                      
                      $trackLength = $trackMin[0].'.'.$trackSeg;
                      $trackLength = number_format($trackLength, 2);
@@ -139,7 +143,11 @@
 
                      $trackMs = $trackLength/60000;
                      $trackMin = explode('.', $trackMs);
+                     if(count($trackMin)< 2){
+                        $trackSeg = $trackMin[0]*60;
+                     }else{
                      $trackSeg = $trackMin[1]*60;
+                     }
                      
                      $trackLength = $trackMin[0].'.'.$trackSeg;
                      $trackLength = number_format($trackLength, 2);
@@ -149,6 +157,7 @@
             
                      $trackInfoSQL = [$trackImage, $trackName, $trackArtist, $trackLink,$trackAlbum,$trackLength];
                      $_SESSION['trackInfoSQl'] = $trackInfoSQL;
+
             
                      echo 
                      "
@@ -158,8 +167,8 @@
                               <span>$trackName</span>
                               <span>$trackArtist</span>
                            </div>
-                           <div>
-                              <audio src='$trackLink' controls autoplay>
+                           <div class='displayfooter'>
+                              <audio id='audio' src='$trackLink' controls autoplay>
                               </audio>
                            </div>
                         </div>     
@@ -169,18 +178,29 @@
                else {
                   echo 
                   "
-                  <div>
-                     <audio src='' controls autoplay></audio>
+                  <div class='displayfooter'>
+                     <audio src='' controls></audio>
                   </div>
                   ";
                }
             }
             else {
+               $lastTrack= $_SESSION['trackInfoSQl'];
+
                echo 
                "
-               <div>
-                  <audio src='' controls autoplay></audio>
-               </div>
+
+               <div id='track-info'>
+                  <img src='$lastTrack[0]' alt=''>
+                  <div id='track-name-artist'>
+                     <span>$lastTrack[1]</span>
+                     <span>$lastTrack[2]</span>
+                  </div>
+                  <div class='displayfooter'>
+                     <audio id='audio' src='$lastTrack[3]' controls>
+                     </audio>
+                  </div>
+               </div> 
                ";
             }
          ?>
