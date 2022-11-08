@@ -3,14 +3,8 @@
 
     session_start();
 
-    
-
-
     $userEmail = $_SESSION['email'];
     $trackToInsert = $_POST;
-    print_r($trackToInsert);
-    // $trackName = $trackToInsert[1];
-    // $trackAlbum = $trackToInsert[4];
 
     if(!empty($trackToInsert[3])){
         $stmt= $connect->prepare("INSERT INTO tracks (track_image, track_name, artist, track_preview, trackAlbum, trackLength) VALUES (?,?,?,?,?,?)");
@@ -37,8 +31,6 @@
     $stmt->execute();
     $trackID = $stmt->get_result();
     $trackID = $trackID->fetch_assoc();
-
-    print_r($trackID);
 
     // SET THE ID'S
     $playlistID = $playlistID['playlist_id'];

@@ -137,7 +137,6 @@
                                     <button id='add-button'>
                                        <img src='../images/loupe.png' alt=''>
                                     </button>
-
                                  </form>
                               </div>
                            </div>
@@ -161,7 +160,7 @@
                      $trackImage = $track[$cookie]->album->images[2]->url;
                      $trackName = $track[$cookie]->name;
                      $trackArtist = $track[$cookie]->album->artists[0]->name;
-                     $trackLink = $track[$cookie]->preview_url;
+                     $trackPreview = $track[$cookie]->preview_url;
                      $trackAlbum = $track[$cookie]->album->name;
                      $trackLength = $track[$cookie]->duration_ms;
 
@@ -172,7 +171,7 @@
                      // transform minutes' decimal in seconds
                      if(count($trackMin)< 2){
                         $trackSeg = $trackMin[0]*60;
-                     }else{
+                     } else {
                         $trackMin[1] = '0.'.$trackMin[1];
                         $test = $trackMin[1] * 60;
 
@@ -191,8 +190,9 @@
                      // organize the length string to show on the page as desired
                      $trackLength = $trackLength[0].":".$trackLength[1].$trackLength[2];
             
-                     $trackInfoSQL = [$trackImage, $trackName, $trackArtist, $trackLink, $trackAlbum, $trackLength];
-                     $_SESSION['trackInfoSQl'] = $trackInfoSQL;
+                     // caso o usuário tenha clicado em uma musica de sua playlist, está é agora salva como a última música selecionada
+                     $lastTrackClicked = [$trackImage, $trackName, $trackArtist, $trackPreview];
+                     $_SESSION['lastTrackClicked'] = $lastTrackClicked;
             
                      echo 
                      "<div>
@@ -202,39 +202,37 @@
                               <span>$trackArtist</span>
                            </div>
                            <div class='displayfooter'>
-                              <audio id='audio' src='$trackLink' controls autoplay>
+                              <audio id='audio' src='$trackPreview' controls autoplay>
                               </audio>
                            </div>
                         </div>";
                   }
-               }
-               else {
-                  echo "<div class='displayfooter'>
-                           <audio src='' controls></audio>
-                        </div>";
-               }
-            }
-            else {
-               if(isset($_SESSION['trackInfoSQl'])){
-                  $lastTrack= $_SESSION['trackInfoSQl'];
-
-                  echo 
-                  "<div>
-                     <img src='$lastTrack[0]' alt=''>
-                     <div>
-                        <span>$lastTrack[1]</span>
-                        <span>$lastTrack[2]</span>
-                     </div>
-                     <div class='displayfooter'>
-                        <audio id='audio' src='$lastTrack[3]' controls>
-                        </audio>
-                     </div>
-                  </div>";
                } else {
                   echo "<div class='displayfooter'>
                            <audio src='' controls></audio>
                         </div>";
                }
+            } else {
+                  if(isset($_SESSION['lastTrackClicked'])){
+                     $lastTrack= $_SESSION['lastTrackClicked'];
+
+                     echo 
+                     "<div>
+                        <img src='$lastTrack[0]' alt=''>
+                        <div>
+                           <span>$lastTrack[1]</span>
+                           <span>$lastTrack[2]</span>
+                        </div>
+                        <div class='displayfooter'>
+                           <audio id='audio' src='$lastTrack[3]' controls>
+                           </audio>
+                        </div>
+                     </div>";
+                  } else { // mostrar player logo ao entrar
+                     echo "<div class='displayfooter'>
+                              <audio src='' controls></audio>
+                           </div>";
+                  }
             }
          ?>
       </footer>

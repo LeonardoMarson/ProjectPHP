@@ -115,6 +115,8 @@
                            <div id='track-length-and-add'>
                               <span>$trackLength</span>
                               <form action='../PHPpages/deleteSong.php' method='POST'>
+                                 <input type='hidden' id='trackName' name='0' value='$trackName' />
+                                 <input type='hidden' id='trackArtist' name='1' value='$trackArtist' />
                                  <button id='add-button'>
                                     <img src='../images/minus.png' alt=''>
                                  </button>
@@ -134,17 +136,16 @@
 
                if(isset($_SESSION['userPlaylist'])){
                   $track = $_SESSION['userPlaylist'];
-                  print_r($cookie);
 
                   if(isset($cookie)){
                      $trackImage = $track[$cookie][0];
                      $trackName = $track[$cookie][1];
                      $trackArtist = $track[$cookie][2];
-                     $trackLink = $track[$cookie][3];
+                     $trackPreview = $track[$cookie][3];
 
-                     $trackToDeleteSQL = [$trackName, $trackArtist];
-                     $_SESSION['trackToDeleteSQl'] = $trackToDeleteSQL;
-                     
+                     // caso o usuário tenha clicado em uma musica de sua playlist, está é agora salva como a última música selecionada
+                     $_SESSION['lastTrackClicked'] = [$trackImage, $trackName, $trackArtist, $trackPreview];
+            
                      echo 
                      "
                         <div>
@@ -154,7 +155,7 @@
                               <span>$trackArtist</span>
                            </div>
                            <div>
-                              <audio src='$trackLink' controls autoplay>
+                              <audio src='$trackPreview' controls autoplay>
                               </audio>
                            </div>
                         </div>     
@@ -169,9 +170,9 @@
                   ";
                }
             } else {
-               if(isset($_SESSION['trackInfoSQl'])){
+               if(isset($_SESSION['lastTrackClicked'])){
 
-                  $lastTrack= $_SESSION['trackInfoSQl'];
+                  $lastTrack= $_SESSION['lastTrackClicked'];
                   echo 
                   "
                   <div>

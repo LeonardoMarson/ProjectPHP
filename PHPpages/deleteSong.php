@@ -2,13 +2,11 @@
     require_once 'connect.php';
     session_start();
 
-    $track = $_SESSION['trackToDeleteSQl'];
-    unset($_SESSION['trackToDeleteSQL']);
-
-    $trackName = $track[0];
-    $trackArtist = $track[1];
-
     $userEmail = $_SESSION['email'];
+    $trackToDelete = $_POST;
+
+    $trackName = $trackToDelete[0];
+    $trackArtist = $trackToDelete[1];
     
     $stmt = $connect->prepare(
         "SELECT relationship.id
@@ -31,6 +29,8 @@
             WHERE id = ?");
     $stmt->bind_param("i", $relationshipID);
     $stmt->execute();
+
+    $connect->close();
 
     echo "Musica deletada com sucesso! Voltando à tela de playlist.";
     header('Refresh: 2; URL=../pages/playlistPage.php');
