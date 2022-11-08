@@ -80,6 +80,7 @@
                      $trackName = $track[$i]->name;
                      $trackArtist = $track[$i]->album->artists[0]->name;
                      $trackAlbum = $track[$i]->album->name;
+                     $trackPreview = $track[$i]->preview_url;
                      $trackLength = $track[$i]->duration_ms;
 
                      // transform ms to minutes
@@ -127,9 +128,16 @@
                               <div id='track-length-and-add'>
                                  <span>$trackLength</span>
                                  <form action='../PHPpages/addSong.php' method='POST'>
+                                    <input type='hidden' id='trackImage' name='0' value='$trackImage' />
+                                    <input type='hidden' id='trackName' name='1' value='$trackName' />
+                                    <input type='hidden' id='trackArtist' name='2' value='$trackArtist' />
+                                    <input type='hidden' id='trackPreview' name='3' value='$trackPreview' />               
+                                    <input type='hidden' id='trackAlbum' name='4' value='$trackAlbum' />
+                                    <input type='hidden' id='trackLength' name='5' value='$trackLength' />
                                     <button id='add-button'>
                                        <img src='../images/loupe.png' alt=''>
                                     </button>
+
                                  </form>
                               </div>
                            </div>
@@ -137,6 +145,7 @@
                      ";
                   }
                }
+               
             ?>         
          </section>
       </main>

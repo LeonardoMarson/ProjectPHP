@@ -3,10 +3,14 @@
 
     session_start();
 
+    
+
+
     $userEmail = $_SESSION['email'];
-    $trackToInsert = $_SESSION['trackInfoSQl'];
-    $trackName = $trackToInsert[1];
-    $trackAlbum = $trackToInsert[4];
+    $trackToInsert = $_POST;
+    print_r($trackToInsert);
+    // $trackName = $trackToInsert[1];
+    // $trackAlbum = $trackToInsert[4];
 
     if(!empty($trackToInsert[3])){
         $stmt= $connect->prepare("INSERT INTO tracks (track_image, track_name, artist, track_preview, trackAlbum, trackLength) VALUES (?,?,?,?,?,?)");
@@ -29,10 +33,12 @@
 
     // SEARCH THE TRACK SELECTED BY THE CURRENT USER
     $stmt = $connect->prepare("SELECT id FROM tracks WHERE track_name = ? AND trackAlbum = ?");
-    $stmt->bind_param("ss", $trackName, $trackAlbum);
+    $stmt->bind_param("ss", $trackToInsert[1], $trackToInsert[4]);
     $stmt->execute();
     $trackID = $stmt->get_result();
     $trackID = $trackID->fetch_assoc();
+
+    print_r($trackID);
 
     // SET THE ID'S
     $playlistID = $playlistID['playlist_id'];
@@ -42,7 +48,7 @@
     $stmt->bind_param("ii", $playlistID, $trackID);
     $stmt->execute();
 
-    unset($_SESSION['trackInfoSQL']);
+    unset($_SESSION['trackInfoSQl']);
     $connect->close();
 
     echo "Musica cadastrada com sucesso! Voltando à tela de login.";

@@ -9,7 +9,7 @@ Array.from(getId).forEach(element => {
 function executeAction(e){
     trackIndex = e.getAttribute('value');
     document.cookie = "selectedIndex=" + trackIndex;
-    document.location.reload(); 
+    document.location.reload();  
 }
 
 let homebutton= document.getElementById('homeButton');
