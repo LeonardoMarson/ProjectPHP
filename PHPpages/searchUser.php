@@ -5,8 +5,6 @@
 
     global $email, $password;
 
-    session_start();
-
     if(isset($_POST['credential'])){
         
         $googleClient = new Google_Client();

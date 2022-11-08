@@ -2,8 +2,6 @@
 	require_once 'verifySession.php';
     require '../PHPpages/spotifySession.php';
 
-	session_start();
-
 	$session->requestCredentialsToken();
 
 	if($session == true){

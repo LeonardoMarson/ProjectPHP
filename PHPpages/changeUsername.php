@@ -1,7 +1,6 @@
 <?php
     require_once 'verifySession.php';
     require_once 'connect.php';
-    session_start();
 
     $actualUser = $_SESSION['email'];
     $newUsername = $_POST['newUsername'];

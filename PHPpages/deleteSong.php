@@ -2,7 +2,6 @@
 
     require_once 'verifySession.php';
     require_once 'connect.php';
-    session_start();
 
     $userEmail = $_SESSION['email'];
     $trackToDelete = $_POST;
