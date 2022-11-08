@@ -5,12 +5,12 @@
 <!DOCTYPE html>
    <html lang="en">
    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <link rel="stylesheet" href="../css/main.css">
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="../css/main.css">
 
-        <title>Document</title>
+      <title>Document</title>
    </head>
    
    <body>
@@ -35,17 +35,21 @@
       </aside>
        
       <main>
-        <section id="main-area">
-            <form action="../PHPpages/changeUsername.php" method="post">
+        <section id="main-area" class="user-main">
+            <h1>
+               Dados do usuário
+            </h1>
+
+            <form action="../PHPpages/changeUsername.php" method="post" id="change-name-form">
                 <div>
                      <label for="">Nome atual de usuário</label>
                      <input type="text" value="<?php echo $_SESSION['user']?>" disabled>
                 </div>
                 <div>
-                     <label for="">Digite o novo nome</label>
+                     <label for="">Digite o novo nome de usuário</label>
                      <input type="text" name="newUsername">
                 </div>
-                <button>CLICA ANIMAL</button>
+                <button>ENVIAR</button>
             </form>
         </section>
       </main>

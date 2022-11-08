@@ -6,10 +6,8 @@
 
     if(isset($_POST['credential'])){
          
-        $googleClient = new Google\Client();
+        $googleClient = new Google_Client();
         $googleClient->setAuthConfig('../client_secret.json');
-        $googleClient->addScope('https://www.googleapis.com/auth/userinfo.profile');
-        $googleClient->addScope('https://www.googleapis.com/auth/userinfo.email');
 
         $id_token = $_POST['credential'];
         $payload = $googleClient->verifyIdToken($id_token);

@@ -148,7 +148,7 @@
             
                      echo 
                      "
-                        <div>
+                        <div class='display-footer'>
                            <img src='$trackImage' alt=''>
                            <div>
                               <span>$trackName</span>
@@ -164,7 +164,7 @@
                } else {
                   echo 
                   "
-                  <div class='displayfooter'>
+                  <div class='display-footer'>
                      <audio src='' controls autoplay></audio>
                   </div>
                   ";
@@ -175,13 +175,13 @@
                   $lastTrack= $_SESSION['lastTrackClicked'];
                   echo 
                   "
-                  <div>
+                  <div class='display-footer'>
                      <img src='$lastTrack[0]' alt=''>
                      <div>
                         <span>$lastTrack[1]</span>
                         <span>$lastTrack[2]</span>
                      </div>
-                     <div class='displayfooter'>
+                     <div>
                         <audio id='audio' src='$lastTrack[3]' controls>
                         </audio>
                      </div>
@@ -190,7 +190,7 @@
                   } else {
                      echo 
                      "
-                     <div class='displayfooter'>
+                     <div class='display-footer'>
                         <audio src='' controls></audio>
                      </div>
                      ";

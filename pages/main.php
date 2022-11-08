@@ -195,20 +195,20 @@
                      $_SESSION['lastTrackClicked'] = $lastTrackClicked;
             
                      echo 
-                     "<div>
-                           <img src='$trackImage' alt=''>
-                           <div>
-                              <span>$trackName</span>
-                              <span>$trackArtist</span>
-                           </div>
-                           <div class='displayfooter'>
-                              <audio id='audio' src='$trackPreview' controls autoplay>
-                              </audio>
-                           </div>
-                        </div>";
+                     "<div class='display-footer'>
+                        <img src='$trackImage' alt=''>
+                        <div>
+                           <span>$trackName</span>
+                           <span>$trackArtist</span>
+                        </div>
+                        <div>
+                           <audio id='audio' src='$trackPreview' controls autoplay>
+                           </audio>
+                        </div>
+                     </div>";
                   }
                } else {
-                  echo "<div class='displayfooter'>
+                  echo "<div class='display-footer'>
                            <audio src='' controls></audio>
                         </div>";
                }
@@ -217,19 +217,19 @@
                      $lastTrack= $_SESSION['lastTrackClicked'];
 
                      echo 
-                     "<div>
+                     "<div class='display-footer'>
                         <img src='$lastTrack[0]' alt=''>
                         <div>
                            <span>$lastTrack[1]</span>
                            <span>$lastTrack[2]</span>
                         </div>
-                        <div class='displayfooter'>
+                        <div>
                            <audio id='audio' src='$lastTrack[3]' controls>
                            </audio>
                         </div>
                      </div>";
                   } else { // mostrar player logo ao entrar
-                     echo "<div class='displayfooter'>
+                     echo "<div class='display-footer'>
                               <audio src='' controls></audio>
                            </div>";
                   }
