@@ -25,6 +25,7 @@ searchbar.addEventListener('click',deleteCookie);
 function deleteCookie(){
     document.cookie = "selectedIndex= ; expires=Thu, 01 Jan 1970 00:00:00 UTC;";  
 }
+
 // GET Y AXIS VALUE ACCORDING TO THE WINDOW
 let header = document.querySelector('header');
 window.addEventListener("scroll", getScrollY);

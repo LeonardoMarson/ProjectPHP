@@ -21,7 +21,6 @@
 		$searchTrack = $clientAPI->search($songSearch, $type, $options);
 
 		$_SESSION['userSearchResult'] = $searchTrack;
-
 		header('Location: ../pages/main.php');
 	}
 	else {

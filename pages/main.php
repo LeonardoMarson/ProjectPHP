@@ -36,7 +36,7 @@
        
       <main>
          <header>
-               <form action="../PHPpages/playlist.php" method="POST">
+               <form action="../PHPpages/spotifyTracks.php" method="POST">
                   <input id="search-bar" 
                         type="search" 
                         maxlength="40" 
@@ -46,10 +46,14 @@
                
                <?php 
                   echo "
-                  <div id='user-info'>
-                     <img src='../images/account-icon.png'>
-                     <p id='username'>{$_SESSION['user']}</p>
-                  </div>";
+                  <div id='user-section'>
+                     <a id='user-info' href='../pages/user.php'>
+                        <img src='../images/account-icon.png'>
+                        <p id='username'>{$_SESSION['user']}</p>
+                     </a>
+                     <a href='../PHPpages/destroySession.php'>SAIR</a>
+                  </div>
+                  ";   
                ?>
          </header>
 
@@ -78,22 +82,33 @@
                      $trackAlbum = $track[$i]->album->name;
                      $trackLength = $track[$i]->duration_ms;
 
-                     $trackMs = $trackLength/60000;
-                     $trackMin = explode('.', $trackMs);
+                     // transform ms to minutes
+                     $trackMin = $trackLength/60000;
+                     $trackMin = explode('.', $trackMin);
+
+                     // transform minutes' decimal in seconds
                      if(count($trackMin)< 2){
                         $trackSeg = $trackMin[0]*60;
                      }else{
-                     $trackSeg = $trackMin[1]*60;
+                        $trackMin[1] = '0.'.$trackMin[1];
+                        $test = $trackMin[1] * 60;
+
+                        if($test < 10){
+                           $test = '0'.intval($test);
+                        }
                      }
                      
-                     $trackLength = $trackMin[0].'.'.$trackSeg;
-                     $trackLength = number_format($trackLength, 2);
+                     // join minutes and seconds
+                     $trackLength = $trackMin[0].$test;
 
-                     $trackLength = explode('.',$trackLength);
-                     $trackLength = $trackLength[0].' : '.$trackLength[1];
+                     // explode the string of minutes and seconds to format
+                     $trackLength = explode('.', $trackLength);
+                     $trackLength = str_split($trackLength[0]);
+
+                     // organize the length string to show on the page as desired
+                     $trackLength = $trackLength[0].":".$trackLength[1].$trackLength[2];
 
                      $trackIndex = $i + 1;
-
 
                      echo 
                      "
@@ -112,7 +127,7 @@
                               <div id='track-length-and-add'>
                                  <span>$trackLength</span>
                                  <form action='../PHPpages/addSong.php' method='POST'>
-                                    <button onclick='window.location='../PHPpages/addSong.php';' id='add-button'>
+                                    <button id='add-button'>
                                        <img src='../images/loupe.png' alt=''>
                                     </button>
                                  </form>
@@ -141,29 +156,39 @@
                      $trackAlbum = $track[$cookie]->album->name;
                      $trackLength = $track[$cookie]->duration_ms;
 
-                     $trackMs = $trackLength/60000;
-                     $trackMin = explode('.', $trackMs);
+                     // transform ms to minutes
+                     $trackMin = $trackLength/60000;
+                     $trackMin = explode('.', $trackMin);
+
+                     // transform minutes' decimal in seconds
                      if(count($trackMin)< 2){
                         $trackSeg = $trackMin[0]*60;
                      }else{
-                     $trackSeg = $trackMin[1]*60;
+                        $trackMin[1] = '0.'.$trackMin[1];
+                        $test = $trackMin[1] * 60;
+
+                        if($test < 10){
+                           $test = '0'.intval($test);
+                        }
                      }
                      
-                     $trackLength = $trackMin[0].'.'.$trackSeg;
-                     $trackLength = number_format($trackLength, 2);
+                     // join minutes and seconds
+                     $trackLength = $trackMin[0].$test;
 
-                     $trackLength = explode('.',$trackLength);
-                     $trackLength = $trackLength[0].' : '.$trackLength[1];
+                     // explode the string of minutes and seconds to format
+                     $trackLength = explode('.', $trackLength);
+                     $trackLength = str_split($trackLength[0]);
+
+                     // organize the length string to show on the page as desired
+                     $trackLength = $trackLength[0].":".$trackLength[1].$trackLength[2];
             
-                     $trackInfoSQL = [$trackImage, $trackName, $trackArtist, $trackLink,$trackAlbum,$trackLength];
+                     $trackInfoSQL = [$trackImage, $trackName, $trackArtist, $trackLink, $trackAlbum, $trackLength];
                      $_SESSION['trackInfoSQl'] = $trackInfoSQL;
-
             
                      echo 
-                     "
-                        <div id='track-info'>
+                     "<div>
                            <img src='$trackImage' alt=''>
-                           <div id='track-name-artist'>
+                           <div>
                               <span>$trackName</span>
                               <span>$trackArtist</span>
                            </div>
@@ -171,45 +196,35 @@
                               <audio id='audio' src='$trackLink' controls autoplay>
                               </audio>
                            </div>
-                        </div>     
-                     ";
+                        </div>";
                   }
                }
                else {
-                  echo 
-                  "
-                  <div class='displayfooter'>
-                     <audio src='' controls></audio>
-                  </div>
-                  ";
+                  echo "<div class='displayfooter'>
+                           <audio src='' controls></audio>
+                        </div>";
                }
             }
             else {
                if(isset($_SESSION['trackInfoSQl'])){
-               $lastTrack= $_SESSION['trackInfoSQl'];
+                  $lastTrack= $_SESSION['trackInfoSQl'];
 
-               echo 
-               "
-
-               <div id='track-info'>
-                  <img src='$lastTrack[0]' alt=''>
-                  <div id='track-name-artist'>
-                     <span>$lastTrack[1]</span>
-                     <span>$lastTrack[2]</span>
-                  </div>
-                  <div class='displayfooter'>
-                     <audio id='audio' src='$lastTrack[3]' controls>
-                     </audio>
-                  </div>
-               </div> 
-               ";
-               }else{
                   echo 
-                  "
-                  <div class='displayfooter'>
-                     <audio src='' controls></audio>
-                  </div>
-                  ";
+                  "<div>
+                     <img src='$lastTrack[0]' alt=''>
+                     <div>
+                        <span>$lastTrack[1]</span>
+                        <span>$lastTrack[2]</span>
+                     </div>
+                     <div class='displayfooter'>
+                        <audio id='audio' src='$lastTrack[3]' controls>
+                        </audio>
+                     </div>
+                  </div>";
+               } else {
+                  echo "<div class='displayfooter'>
+                           <audio src='' controls></audio>
+                        </div>";
                }
             }
          ?>

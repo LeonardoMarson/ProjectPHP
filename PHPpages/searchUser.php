@@ -19,16 +19,16 @@
         if (isset($payload['email'])) {
             $password = $payload['sub'];
 
-            $stmt= $connect->prepare("SELECT password FROM user WHERE password=?");
+            $stmt= $connect->prepare("SELECT password, username FROM user WHERE password=?");
             $stmt->bind_param("s", $password);
             $stmt->execute();
             $result = $stmt->get_result();
-            $user = $result->fetch_assoc();
+            $user = $result->fetch_row();
          
             if (isset($user)){
                 $_SESSION['email'] = $payload['email'];
 
-                $username = $payload['name'];
+                $username = $user[1];
                 $username = explode(' ', $username);
                 $_SESSION['user'] = $username[0];
 

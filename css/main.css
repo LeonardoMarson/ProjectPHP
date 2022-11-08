@@ -66,6 +66,25 @@ header #username {
     align-self: center;
 }
 
+header #user-section {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-right: 2.5rem;
+}
+
+header #user-section>a+a {
+    text-decoration: none;
+    color: white;
+    background-color: var(--primarycolor);
+    padding: 0.8rem 2rem 0.8rem 2rem;
+    border-radius: 3rem;
+}
+
+header #user-section>a+a:hover {
+    color: var(--secondarycolor);
+}
+
 header #user-info {
     display: flex;
     gap: 1rem;
@@ -73,6 +92,12 @@ header #user-info {
     padding: 0.2rem 1.6rem 0.2rem 1rem;
     width: min-content;
     border-radius: 3rem;
+    text-decoration: none;
+    color: white;
+}
+
+header #user-info:hover {
+    color: var(--secondarycolor);
 }
 
 header #user-info img {
@@ -254,6 +279,5 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 

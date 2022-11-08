@@ -6,10 +6,7 @@
     $userEmail = $_SESSION['email'];
     $trackToInsert = $_SESSION['trackInfoSQl'];
     $trackName = $trackToInsert[1];
-
-    echo "<pre>";
-               print_r($trackToInsert);
-               echo "</pre>";
+    $trackAlbum = $trackToInsert[4];
 
     if(!empty($trackToInsert[3])){
         $stmt= $connect->prepare("INSERT INTO tracks (track_image, track_name, artist, track_preview, trackAlbum, trackLength) VALUES (?,?,?,?,?,?)");
@@ -31,8 +28,8 @@
     $playlistID = $playlistID->fetch_assoc();
 
     // SEARCH THE TRACK SELECTED BY THE CURRENT USER
-    $stmt = $connect->prepare("SELECT id FROM tracks WHERE track_name = ?");
-    $stmt->bind_param("s", $trackName);
+    $stmt = $connect->prepare("SELECT id FROM tracks WHERE track_name = ? AND trackAlbum = ?");
+    $stmt->bind_param("ss", $trackName, $trackAlbum);
     $stmt->execute();
     $trackID = $stmt->get_result();
     $trackID = $trackID->fetch_assoc();

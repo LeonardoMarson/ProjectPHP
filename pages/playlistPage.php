@@ -38,9 +38,12 @@
          <header id="playlist-header">
                <?php 
                   echo "
-                  <div id='user-info'>
-                     <img src='../images/account-icon.png'>
-                     <p id='username'>{$_SESSION['user']}</p>
+                  <div id='user-section'>
+                     <a id='user-info' href='../pages/user.php'>
+                        <img src='../images/account-icon.png'>
+                        <p id='username'>{$_SESSION['user']}</p>
+                     </a>
+                     <a href='../PHPpages/destroySession.php'>SAIR</a>
                   </div>";
                ?>
          </header>
@@ -95,54 +98,58 @@
                   $trackIndex = $i + 1;
 
                   $_SESSION['userPlaylist'] = $playlistTracks;
-               echo 
-                     "
-                        <div id='tracks' value='{$i}'>
-                           <div id='track-info'>
-                              <span id='click'>$trackIndex</span>
-                              <img src='$trackImage' alt=''>
-                              <div id='track-name-artist'>
-                                 <span>$trackName</span>
-                                 <span>$trackArtist</span>
-                              </div>
-                           </div>
-                           
-                           <div id='track-length'>
-                              <span id='album-name'>$trackAlbum</span>
-                              <div id='track-length-and-add'>
-                                 <span>$trackLength</span>
-                                 <form action='../PHPpages/deleteSong.php' method='POST'>
-                                    <button onclick='window.location='../PHPpages/deleteSong.php';' id='add-button'>
-                                       <img src='../images/minus.png' alt=''>
-                                    </button>
-                                 </form>
-                              </div>
+                  echo 
+                  "
+                     <div id='tracks' value='{$i}'>
+                        <div id='track-info'>
+                           <span id='click'>$trackIndex</span>
+                           <img src='$trackImage' alt=''>
+                           <div id='track-name-artist'>
+                              <span>$trackName</span>
+                              <span>$trackArtist</span>
                            </div>
                         </div>
-                     ";
+                        
+                        <div id='track-length'>
+                           <span id='album-name'>$trackAlbum</span>
+                           <div id='track-length-and-add'>
+                              <span>$trackLength</span>
+                              <form action='../PHPpages/deleteSong.php' method='POST'>
+                                 <button id='add-button'>
+                                    <img src='../images/minus.png' alt=''>
+                                 </button>
+                              </form>
+                           </div>
+                        </div>
+                     </div>
+                  ";
                }
             ?>         
          </section>
       </main>
       <footer>
          <?php
-             if(isset($_COOKIE['selectedIndex'])){
+            if(isset($_COOKIE['selectedIndex'])){
                $cookie = $_COOKIE['selectedIndex'];
 
                if(isset($_SESSION['userPlaylist'])){
                   $track = $_SESSION['userPlaylist'];
+                  print_r($cookie);
 
                   if(isset($cookie)){
                      $trackImage = $track[$cookie][0];
                      $trackName = $track[$cookie][1];
                      $trackArtist = $track[$cookie][2];
                      $trackLink = $track[$cookie][3];
+
+                     $trackToDeleteSQL = [$trackName, $trackArtist];
+                     $_SESSION['trackToDeleteSQl'] = $trackToDeleteSQL;
                      
                      echo 
                      "
-                        <div id='track-info'>
+                        <div>
                            <img src='$trackImage' alt=''>
-                           <div id='track-name-artist'>
+                           <div>
                               <span>$trackName</span>
                               <span>$trackArtist</span>
                            </div>
@@ -153,7 +160,7 @@
                         </div>     
                      ";
                   }
-               }else{
+               } else {
                   echo 
                   "
                   <div class='displayfooter'>
@@ -161,14 +168,33 @@
                   </div>
                   ";
                }
-             }else{
-               echo 
-               "
-               <div class='displayfooter'>
-                  <audio src='' controls autoplay></audio>
-               </div>
-               ";
-             }
+            } else {
+               if(isset($_SESSION['trackInfoSQl'])){
+
+                  $lastTrack= $_SESSION['trackInfoSQl'];
+                  echo 
+                  "
+                  <div>
+                     <img src='$lastTrack[0]' alt=''>
+                     <div>
+                        <span>$lastTrack[1]</span>
+                        <span>$lastTrack[2]</span>
+                     </div>
+                     <div class='displayfooter'>
+                        <audio id='audio' src='$lastTrack[3]' controls>
+                        </audio>
+                     </div>
+                  </div> ";
+
+                  } else {
+                     echo 
+                     "
+                     <div class='displayfooter'>
+                        <audio src='' controls></audio>
+                     </div>
+                     ";
+                  }
+            }
          ?>
       </footer>
    </body>
