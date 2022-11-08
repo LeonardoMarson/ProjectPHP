@@ -1,4 +1,5 @@
 <?php
+    require_once 'verifySession.php';
     require_once("connect.php"); 
     require_once '../vendor/autoload.php';
 

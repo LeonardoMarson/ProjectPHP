@@ -1,4 +1,5 @@
 <?php
+	require_once 'verifySession.php';
 	require '../vendor/autoload.php';
 
 	$clientAPI = new SpotifyWebAPI\SpotifyWebAPI();
