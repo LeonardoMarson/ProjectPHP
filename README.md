@@ -1,4 +1,4 @@
 # Projeto PHP
 
-#Projeto utilizando PHP, destinado à disciplina de Desenvolvimento Web
+# Projeto utilizando PHP, destinado à disciplina de Desenvolvimento Web II
 
